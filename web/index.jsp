@@ -21,10 +21,10 @@
         
         <h3>Catálogo</h3>
         
-        <%Catalogo catalogo = new Catalogo();
+        <%Catalogo catalogo = Catalogo.getObjectCatalogo();
           ArrayList<Producto> productos = catalogo.getCatalogo();
           CarritoCompra carrito = (CarritoCompra) session.getAttribute("CarritoCompra");
-        
+          
         if(carrito == null) {
             carrito = new CarritoCompra();
             session.setAttribute("CarritoCompra", carrito);
@@ -43,17 +43,19 @@
         <p><a href="/FirstWebPs/VistaCarrito.jsp">Ver carrito (<%=tamañoCarrito%>)</a></p>   
             
         <%}%>
-            
+       
             <table border="3">
-            <tr><th>Nombre</th><!--th>Cantidad</th--><th>Precio</th></tr>
+            <tr><th>Titutlo</th><!--th>Cantidad</th--><th>Autor</th><th>Páginas</th><th>Precio</th><th>Imagen</th></tr>
         <% for(Producto a : productos){ 
+            /*
                String addProductoURL = "/FirstWebPs/AddCarrito?"+
             "nombreProducto="+URLEncoder.encode(a.getNombreProducto())+
             "&cantidadProducto="+URLEncoder.encode(Integer.toString(a.getCantidad()))+
             "&precioProducto="+URLEncoder.encode(Double.toString(a.getPrecio()));
+            */
         %>
               <tr>
-              <td><%=a.getNombreProducto()%></td>
+              <td align="center"><%=a.getTitulo()%></td>
               <!--input type="hidden" name="nombreProducto" value=<!--%=a.getNombreProducto()%> /-->
               <!--td><select name="cantidad">
                         <option value="0">0</option>
@@ -63,12 +65,21 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select></td-->
-              <td><%=a.getPrecio()%></td> 
+              <td align="center"><%=a.getAutor()%></td>
+              
+              <td align="center"><%=a.getPaginas()%></td>
+              
+              <td align="center"><%=a.getPrecio()%></td>
+              
+              <td align="center"><img src="<%=a.getImagen()%>" width="100" height="150"/></td>
               <!--input type="hidden" name="precioProducto" value=<!--%=a.getPrecio()%> /-->
-              <td><form action="AddCarrito">
-                      <input type="hidden" name="nombreProducto" value="<%=a.getNombreProducto()%>" />
-                      <input type="hidden" name="precioProducto" value="<%= a.getPrecio()%>" />
-                      <select name="cantidadProducto">
+              <td align="center"><form action="AddCarrito">
+                      <input type="hidden" name="tituloLibro" value="<%=a.getTitulo()%>" />
+                      <input type="hidden" name="autorLibro" value="<%=a.getAutor()%>" />
+                      <input type="hidden" name="precioLibro" value="<%= a.getPrecio()%>" />
+                      <input type="hidden" name="paginasLibro" value="<%= a.getPaginas()%>" />
+                      <input type="hidden" name="imagenLibro" value="<%= a.getImagen()%>" />
+                      <select name="cantidadLibro">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>

@@ -35,11 +35,15 @@ public class AddCarrito extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nombreProducto = request.getParameter("nombreProducto");
-        double precio = Double.parseDouble(request.getParameter("precioProducto"));
-        int cantidad = Integer.parseInt(request.getParameter("cantidadProducto"));
+        String tituloLibro = request.getParameter("tituloLibro");
+        String autorLibro = request.getParameter("autorLibro");
+        String imagenLibro = request.getParameter("imagenLibro");
+        double precioLibro = Double.parseDouble(request.getParameter("precioLibro"));
+        int cantidadLibro = Integer.parseInt(request.getParameter("cantidadLibro"));
+        Long paginasLibro = Long.parseLong(request.getParameter("paginasLibro"));
         
-        Producto nuevoProducto = new Producto(nombreProducto, precio, cantidad);
+        
+        Producto nuevoProducto = new Producto(autorLibro, tituloLibro, paginasLibro, precioLibro, cantidadLibro, imagenLibro);
         
         HttpSession session = request.getSession();
         
@@ -55,7 +59,7 @@ public class AddCarrito extends HttpServlet {
         ArrayList<Producto> arrayCarrito = carrito.getCarrito();
         boolean control = true;
         for(Producto a : arrayCarrito) {
-            if (a.equalsProducto(nuevoProducto)) {
+            if (a.getTitulo().equals(nuevoProducto.getTitulo())) {
                 a.setCantidad(a.getCantidad() + nuevoProducto.getCantidad());
                 control = false;
             }

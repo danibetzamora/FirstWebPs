@@ -6,48 +6,70 @@ package model;
  */
 public class Producto {
 
-    private String nombreProducto;
+    private String autor;
+    private String titulo;
+    private Long paginas;
     private double precio;
+    private String imagen;
     private int cantidad;
     
-    public Producto(String nombreProducto, double precio, int cantidad) {
-        this.nombreProducto = nombreProducto;
+    public Producto(String autor, String titulo, Long paginas, double precio, int cantidad, String imagen) {
+        this.autor = autor;
+        this.titulo = titulo;
+        this.paginas = paginas;
         this.precio = precio;
         this.cantidad = cantidad;
+        this.imagen = imagen;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setPaginas(Long paginas) {
+        this.paginas = paginas;
     }
 
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    
+
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    public String getNombreProducto() {
-        return nombreProducto;
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public Long getPaginas() {
+        return paginas;
     }
 
     public double getPrecio() {
         return precio;
     }
-    
+
     public int getCantidad() {
         return cantidad;
     }
-    
-    public boolean equalsProducto (Producto productoCMP) {
 
-        if(this.nombreProducto.equals(productoCMP.getNombreProducto()) && this.precio == productoCMP.getPrecio()) {
-            return true;
-        } else {
-            return false;
-        }
-        
+    public String getImagen() {
+        return imagen;
     }
+    
+
  
 }

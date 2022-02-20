@@ -50,7 +50,7 @@ public class RealizarCompra extends HttpServlet {
         double precioTotal = 0.0;
         
         for(Producto a : arrayCarrito) {
-            precioTotal += (a.getCantidad() * a.getPrecio());
+            precioTotal += ((double)Math.round((a.getCantidad() * a.getPrecio()) * 100d) / 100d);
         }
         
         request.setAttribute("precioTotal", precioTotal);

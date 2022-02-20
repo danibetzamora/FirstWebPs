@@ -30,14 +30,17 @@
         <% } else { %>
         <div>
         <table border="3"> 
-        <tr><th>Nombre</th><th>Cantidad</th><th>Precio</th></tr>
+        <tr><th>Titulo</th><th>Autor</th><th>Imagen</th><th>Cantidad</th><th>Precio</th></tr>
         <% ArrayList<Producto> productos = carrito.getCarrito();
             for(int i = 0; i < productos.size(); i++) { %>
             
-            <tr><td><%=productos.get(i).getNombreProducto()%></td>
-            <td><%=productos.get(i).getCantidad()%></td>
-            <td><%= (productos.get(i).getCantidad() *  productos.get(i).getPrecio())%></td>
-            <td>
+            <tr><td align="center"><%=productos.get(i).getTitulo()%></td>
+                <td align="center"><%=productos.get(i).getAutor()%></td>
+                
+                <td align="center"><img src="<%=productos.get(i).getImagen()%>" width="100" height="150"/></td>
+            <td align="center"><%=productos.get(i).getCantidad()%></td>
+            <td align="center"><%= (double)Math.round((productos.get(i).getCantidad() *  productos.get(i).getPrecio()) * 100d) / 100d%></td>
+            <td align="center">
                 <!--a href="/FirstWebPs/RemoveCarrito?indiceProducto=<!%=i%>">Eliminar</a-->
                 <form action="RemoveCarrito">
                     <input type="hidden" name="indiceProducto" value="<%=i%>" />

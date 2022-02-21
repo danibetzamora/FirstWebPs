@@ -4,14 +4,15 @@ package model;
  *
  * @author Daniel BZ
  */
+
 public class Producto {
 
     private String autor;
     private String titulo;
     private Long paginas;
+    private int cantidad;
     private double precio;
     private String imagen;
-    private int cantidad;
     
     public Producto(String autor, String titulo, Long paginas, double precio, int cantidad, String imagen) {
         this.autor = autor;
@@ -69,7 +70,5 @@ public class Producto {
     public String getImagen() {
         return imagen;
     }
-    
 
- 
 }

@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,39 +17,39 @@ import model.Producto;
 
 /**
  *
- * @author Usuario
+ * @author Daniel BZ
  */
+
 @WebServlet(name = "RealizarCompra", urlPatterns = {"/RealizarCompra"})
 public class RealizarCompra extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession session = request.getSession();
+       
+        HttpSession session = request.getSession();
         
         CarritoCompra carrito = (CarritoCompra) session.getAttribute("CarritoCompra");
         
         if(carrito == null) {
-            
             carrito = new CarritoCompra();
             session.setAttribute("CarritoCompra", carrito);
-            
         }
         
-        ArrayList<Producto> arrayCarrito = carrito.getCarrito();
+        ArrayList<Producto> carritoLibros = carrito.getCarrito();
+        
         double precioTotal = 0.0;
         
-        for(Producto a : arrayCarrito) {
-            precioTotal += ((double)Math.round((a.getCantidad() * a.getPrecio()) * 100d) / 100d);
+        for(Producto libro : carritoLibros) {
+            precioTotal += libro.getPrecio();
         }
+        
+        DecimalFormatSymbols mySeparador = new DecimalFormatSymbols();
+        mySeparador.setDecimalSeparator('.');
+        DecimalFormat myFormat = new DecimalFormat("#.00", mySeparador);
+        
+        precioTotal = Double.parseDouble(myFormat.format(precioTotal));
+        
+        carritoLibros.clear();
         
         request.setAttribute("precioTotal", precioTotal);
         
@@ -60,6 +58,7 @@ public class RealizarCompra extends HttpServlet {
         if(dispatch != null) {
             dispatch.forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

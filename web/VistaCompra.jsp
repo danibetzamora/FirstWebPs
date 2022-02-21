@@ -1,7 +1,6 @@
 <%-- 
     Document   : VistaCompra
-    Created on : 18 feb. 2022, 0:25:00
-    Author     : Usuario
+    Author     : Daniel BZ
 --%>
 
 <%@page import="model.CarritoCompra"%>
@@ -12,23 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Purchase</title>
     </head>
-    <body>
-        <% HttpSession sessionFinal = request.getSession();
-        
-        CarritoCompra carrito = (CarritoCompra) sessionFinal.getAttribute("CarritoCompra");
-        
-        if(carrito == null) {
-            
-            carrito = new CarritoCompra();
-            session.setAttribute("CarritoCompra", carrito);
-            
-        }
-            carrito.getCarrito().clear();
-            sessionFinal.setAttribute("CarritoCompra", carrito);
-        %>
+    <body bgcolor="paleturquoise">
         <h1>Resultado de la Compra</h1>
         <p>¡Muchas gracias por su compra!</p>
-        <p>El importe total es: <b><%= request.getAttribute("precioTotal")%></b></p>
+        <p>El importe total es: <b><%= request.getAttribute("precioTotal")%> €</b></p>
         <form action="index.jsp">
             <input type="submit" value="Volver al Catálogo" />
         </form>

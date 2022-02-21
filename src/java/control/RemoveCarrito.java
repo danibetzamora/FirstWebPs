@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package control;
 
 import java.io.IOException;
@@ -17,39 +13,28 @@ import model.Producto;
 
 /**
  *
- * @author Usuario
+ * @author Daniel BZ
  */
+
 @WebServlet(name = "RemoveCarrito", urlPatterns = {"/RemoveCarrito"})
 public class RemoveCarrito extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int indiceProducto = Integer.parseInt(request.getParameter("indiceProducto"));
         
         HttpSession session = request.getSession();
         
         CarritoCompra carrito = (CarritoCompra) session.getAttribute("CarritoCompra");
         
         if(carrito == null) {
-            
             carrito = new CarritoCompra();
             session.setAttribute("CarritoCompra", carrito);
-            
         }
         
+        int indiceProducto = Integer.parseInt(request.getParameter("indiceProducto"));
+        
         carrito.removeProducto(indiceProducto);
-        response.sendRedirect(response.encodeRedirectURL(
-            "/FirstWebPs/VistaCarrito.jsp"));
+        response.sendRedirect(response.encodeRedirectURL("/FirstWebPs/VistaCarrito.jsp"));
         
     }
 

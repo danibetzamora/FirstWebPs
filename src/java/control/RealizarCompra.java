@@ -37,6 +37,14 @@ public class RealizarCompra extends HttpServlet {
         
         ArrayList<Producto> carritoLibros = carrito.getCarrito();
         
+        if(carritoLibros.isEmpty()) {
+            RequestDispatcher dispatch = request.getRequestDispatcher("Error.jsp");
+        
+            if(dispatch != null) {
+                dispatch.forward(request, response);
+            }
+        }
+        
         double precioTotal = 0.0;
         
         for(Producto libro : carritoLibros) {

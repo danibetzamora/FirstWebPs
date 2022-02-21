@@ -54,31 +54,31 @@
                 </tr>
                 
                 <% for(Producto libro : catalogoLibros) { %>
-                    <tr>
-                        <td align="center"><img src="<%=libro.getImagen()%>" width="100" height="150"/></td>
-                        <td align="center"><%=libro.getTitulo()%></td>
-                        <td align="center"><%=libro.getAutor()%></td>
-                        <td align="center"><%=libro.getPaginas()%></td>
-                        <td align="center"><%=libro.getPrecio()%> €</td>
-                        <td align="center">
-                            <form action="AddCarrito">
-                                <input type="hidden" name="imagenLibro" value="<%= libro.getImagen()%>" />
-                                <input type="hidden" name="tituloLibro" value="<%=libro.getTitulo()%>" />
-                                <input type="hidden" name="autorLibro" value="<%=libro.getAutor()%>" />
-                                <input type="hidden" name="paginasLibro" value="<%= libro.getPaginas()%>" />
-                                <input type="hidden" name="precioLibro" value="<%= libro.getPrecio()%>" />
-                                    <select name="cantidadLibro">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>    
-                                <input type="submit" value="Añadir Producto" />
-                            </form>
-                        </td>
-                    </tr>
-                <% } %>
+                        <tr>
+                            <td align="center"><img src="<%=libro.getImagen()%>" width="100" height="150"/></td>
+                            <td align="center"><%=libro.getTitulo()%></td>
+                            <td align="center"><%=libro.getAutor()%></td>
+                            <td align="center"><%=libro.getPaginas()%></td>
+                            <td align="center"><%=libro.getPrecio()%> €</td>
+                            <td align="center">
+                                <form action="AddCarrito">
+                                    <input type="hidden" name="imagenLibro" value="<%= libro.getImagen()%>" />
+                                    <input type="hidden" name="tituloLibro" value="<%=libro.getTitulo()%>" />
+                                    <input type="hidden" name="autorLibro" value="<%=libro.getAutor()%>" />
+                                    <input type="hidden" name="paginasLibro" value="<%= libro.getPaginas()%>" />
+                                    <input type="hidden" name="precioLibro" value="<%= libro.getPrecio()%>" />
+                                        <select name="cantidadLibro">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>    
+                                    <input type="submit" value="Añadir Producto" />
+                                </form>
+                            </td>
+                        </tr>
+                <%  }  %>
             </table>
         </body>
     </center>

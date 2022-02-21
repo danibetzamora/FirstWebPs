@@ -34,7 +34,7 @@ public class Catalogo {
             Random rnd = new Random();
             DecimalFormatSymbols mySeparador = new DecimalFormatSymbols();
             mySeparador.setDecimalSeparator('.');
-            DecimalFormat myFormat = new DecimalFormat("0.00", mySeparador);
+            DecimalFormat myFormat = new DecimalFormat("#.00", mySeparador);
             
             for (int i=0; i < jsonObject.size(); i++) {
                 JSONObject jsonObject1 = (JSONObject) jsonObject.get(i);

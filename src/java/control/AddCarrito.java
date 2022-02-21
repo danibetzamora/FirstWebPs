@@ -2,6 +2,8 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,16 +47,20 @@ public class AddCarrito extends HttpServlet {
         
         boolean control = true;
         
+        DecimalFormatSymbols mySeparador = new DecimalFormatSymbols();
+        mySeparador.setDecimalSeparator('.');
+        DecimalFormat myFormat = new DecimalFormat("#.00", mySeparador);
+        
         for(Producto libro : carritoLibros) {
             if (libro.getTitulo().equals(nuevoLibro.getTitulo())) {
                 libro.setCantidad(libro.getCantidad() + nuevoLibro.getCantidad());
-                libro.setPrecio(libro.getCantidad() * nuevoLibro.getPrecio());
+                libro.setPrecio(Double.parseDouble(myFormat.format(libro.getCantidad() * nuevoLibro.getPrecio())));
                 control = false;
                 
             }
         }
         if(control) {
-            nuevoLibro.setPrecio(nuevoLibro.getCantidad() * nuevoLibro.getPrecio());
+            nuevoLibro.setPrecio(Double.parseDouble(myFormat.format(nuevoLibro.getCantidad() * nuevoLibro.getPrecio())));
             carrito.addProducto(nuevoLibro);
         }
         

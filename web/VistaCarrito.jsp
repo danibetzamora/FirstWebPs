@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cart</title>
         <link href="styles/style.css" rel="stylesheet" type="text/css">
+        <link href="styles/styleTitle.css" rel="stylesheet" type="text/css">
     </head>
     <body bgcolor="lavender">
         <h1>Carrito de la Compra</h1>
@@ -27,7 +28,7 @@
         
             if(carrito.getCarrito().size() == 0) { 
         %>
-            <h2>El carrito de la compra está vacío</h2>    
+            <h3>El carrito de la compra está vacío</h3>    
         <% } else { %>
             <table border="5" bgcolor="white"> 
                 <tr>

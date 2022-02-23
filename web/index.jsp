@@ -12,75 +12,74 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Catalogue</title>
-        <link href="styles/style.css" rel="stylesheet" type="text/css">
-        <link href="styles/styleTitle.css" rel="stylesheet" type="text/css">
-    </head>
-    <center>
+        <head>
+            <title>Catalogue</title>
+            <link href="styles/style.css" rel="stylesheet" type="text/css">
+        </head>
         <body bgcolor="paleturquoise">
-            
-            <h1>¡Bienvenido al Carrito de la Compra!</h1>
-            <h2>Catálogo</h2>
+            <div class="container">
+                <center>
+                    <jsp:include page = "header.jsp"/>
+                    <%
+                        Catalogo catalogo = Catalogo.getCatalogoInstance();
+                        ArrayList<Producto> catalogoLibros = catalogo.getCatalogo();
 
-            <%
-                Catalogo catalogo = Catalogo.getCatalogoInstance();
-                ArrayList<Producto> catalogoLibros = catalogo.getCatalogo();
-                
-                CarritoCompra carrito = (CarritoCompra) session.getAttribute("CarritoCompra");
+                        CarritoCompra carrito = (CarritoCompra) session.getAttribute("CarritoCompra");
 
-                if(carrito == null) {
-                    carrito = new CarritoCompra();
-                    session.setAttribute("CarritoCompra", carrito);
-                }
+                        if(carrito == null) {
+                            carrito = new CarritoCompra();
+                            session.setAttribute("CarritoCompra", carrito);
+                        }
 
-                int tamañoCarrito = 0;
+                        int tamañoCarrito = 0;
 
-                for(Producto libro : carrito.getCarrito()) {
-                    tamañoCarrito += libro.getCantidad();
-                }
+                        for(Producto libro : carrito.getCarrito()) {
+                            tamañoCarrito += libro.getCantidad();
+                        }
 
-                if(tamañoCarrito == 0) { 
-            %>
-                    <p><a href="/FirstWebPs/VistaCarrito.jsp">Ver carrito</a></p>
-            <%  } else {%>
-                    <p><a href="/FirstWebPs/VistaCarrito.jsp">Ver carrito (<%=tamañoCarrito%>)</a></p>   
-            <%  }       %>
+                        if(tamañoCarrito == 0) { 
+                    %>
+                            <p><a href="/FirstWebPs/VistaCarrito.jsp">Ver carrito</a></p>
+                    <%  } else {%>
+                            <p><a href="/FirstWebPs/VistaCarrito.jsp">Ver carrito (<%=tamañoCarrito%>)</a></p>   
+                    <%  }       %>
 
-            <table border="5" bgcolor="white" cellspacing="2">
-                <tr>
-                    <th>Imagen Libro</th><th>Título</th><th>Autor</th>
-                    <th>Páginas</th><th>Precio</th><th>Eliga Cantidad</th>
-                </tr>
-                
-                <% for(Producto libro : catalogoLibros) { %>
+                    <table border="5" bgcolor="white" cellspacing="2">
                         <tr>
-                            <td align="center"><img src="<%=libro.getImagen()%>" width="100" height="150"/></td>
-                            <td align="center"><%=libro.getTitulo()%></td>
-                            <td align="center"><%=libro.getAutor()%></td>
-                            <td align="center"><%=libro.getPaginas()%></td>
-                            <td align="center"><%=libro.getPrecio()%> €</td>
-                            <td align="center">
-                                <form action="AddCarrito">
-                                    <input type="hidden" name="imagenLibro" value="<%= libro.getImagen()%>" />
-                                    <input type="hidden" name="tituloLibro" value="<%=libro.getTitulo()%>" />
-                                    <input type="hidden" name="autorLibro" value="<%=libro.getAutor()%>" />
-                                    <input type="hidden" name="paginasLibro" value="<%= libro.getPaginas()%>" />
-                                    <input type="hidden" name="precioLibro" value="<%= libro.getPrecio()%>" />
-                                        <select name="cantidadLibro">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>    
-                                    <input type="submit" value="Añadir Producto" />
-                                </form>
-                            </td>
+                            <th>Imagen Libro</th><th>Título</th><th>Autor</th>
+                            <th>Páginas</th><th>Precio</th><th>Eliga Cantidad</th>
                         </tr>
-                <%  }  %>
-            </table>
+
+                        <% for(Producto libro : catalogoLibros) { %>
+                                <tr>
+                                    <td align="center"><img src="<%=libro.getImagen()%>" width="100" height="150"/></td>
+                                    <td align="center"><%=libro.getTitulo()%></td>
+                                    <td align="center"><%=libro.getAutor()%></td>
+                                    <td align="center"><%=libro.getPaginas()%></td>
+                                    <td align="center"><%=libro.getPrecio()%> €</td>
+                                    <td align="center">
+                                        <form action="AddCarrito">
+                                            <input type="hidden" name="imagenLibro" value="<%= libro.getImagen()%>" />
+                                            <input type="hidden" name="tituloLibro" value="<%=libro.getTitulo()%>" />
+                                            <input type="hidden" name="autorLibro" value="<%=libro.getAutor()%>" />
+                                            <input type="hidden" name="paginasLibro" value="<%= libro.getPaginas()%>" />
+                                            <input type="hidden" name="precioLibro" value="<%= libro.getPrecio()%>" />
+                                                <select name="cantidadLibro">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>    
+                                            <input type="submit" value="Añadir Producto" />
+                                        </form>
+                                    </td>
+                                </tr>
+                        <%  }  %>
+                    </table>
+                </center>
+            </div>
+            <jsp:include page="footer.jsp"/>
         </body>
-    </center>
+    </center>               
 </html>

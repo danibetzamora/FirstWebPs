@@ -9,15 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Purchase</title>
-        <link href="styles/styleTitle.css" rel="stylesheet" type="text/css">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+        <title>Purchase</title>   
     </head>
     <body bgcolor="paleturquoise">
-        <h1>Resultado de la Compra</h1>
-        <b>¡Muchas gracias por su compra!</b>
-        <p>El importe total es: <b><%= request.getAttribute("precioTotal")%> €</b></p>
-        <form action="index.jsp">
-            <input type="submit" value="Volver al Catálogo" />
-        </form>
+        <div class="container">
+            <h1>Resultado de la Compra</h1>
+            <b>¡Muchas gracias por su compra!</b>
+            <p>El importe total es: <b><%= request.getAttribute("precioTotal")%> €</b></p>
+            <form action="index.jsp">
+                <input type="submit" value="Volver al Catálogo" />
+            </form>
+        </div>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>
